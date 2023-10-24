@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from backend import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('items/', views.item_list),
+    #man kan sätta den till att antingen gå genom Id som det gör nu eller så gör man det med PK
+    path('items/<int:id>', views.item_detail)
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
