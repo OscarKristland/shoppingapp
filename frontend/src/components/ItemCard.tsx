@@ -1,5 +1,4 @@
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 
