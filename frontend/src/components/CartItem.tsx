@@ -4,9 +4,19 @@ import { useEffect, useState } from "react"
 import { formatCurrency } from "../utilities/formatCurrency"
 
 
+type CartItemProps = {
+    id: number
+    quantity: number
+    name: string
+    price: number
+}
+
 export function CartItem({id, quantity}: CartItemProps) {
 
+    const { cartItems } = useShoppingCart();
+    
     const [storeItems, setAllItems] = useState([]);
+    
     
     useEffect(() => {
         fetch('http://127.0.0.1:8000/items/')
@@ -19,6 +29,7 @@ export function CartItem({id, quantity}: CartItemProps) {
     const{removeFromCart} = useShoppingCart()
     const item = storeItems.find(i => i.id === id)
     if(item == null) return null
+    console.log(cartItems);
     
     return (
         <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
