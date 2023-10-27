@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', views.item_list),
     #man kan sätta den till att antingen gå genom Id som det gör nu eller så gör man det med PK
-    path('items/<int:id>', views.item_detail)
+    path('items/<int:id>', views.item_detail),
+    path('create_order_details/', views.create_order_details, name='create_order_details'),
+    path('orders/', views.create_order, name='create_order'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

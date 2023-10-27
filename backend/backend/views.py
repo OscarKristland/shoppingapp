@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from .models import Item
-from .serializers import ItemSerializer
+from .serializers import ItemSerializer, OrderDetailsSerializer, OrderSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,7 +16,7 @@ def item_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+        
 @api_view(['GET', 'PUT', 'DELETE'])
 def item_detail(request, id, format=None):
 
@@ -37,3 +37,21 @@ def item_detail(request, id, format=None):
     elif request.method == 'DELETE':
         item.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def create_order_details(request, format=None):
+    if request.method == 'POST':
+        serializer = OrderDetailsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def create_order(request):
+    if request.method == 'POST':
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
