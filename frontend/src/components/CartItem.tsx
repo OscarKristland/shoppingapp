@@ -11,6 +11,8 @@ type CartItemProps = {
     price: number
 }
 
+// props borde typ varit en egen mapp med separata filer. Det blir mer återanvändbart
+
 export function CartItem({id, quantity}: CartItemProps) {
 
     const { cartItems } = useShoppingCart();

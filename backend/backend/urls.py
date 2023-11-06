@@ -16,16 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend import views
+
 from rest_framework.urlpatterns import format_suffix_patterns
+from .views import OrderListCreateView, ItemListCreateView
+from backend import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('items/', views.item_list),
     #man kan sätta den till att antingen gå genom Id som det gör nu eller så gör man det med PK
     path('items/<int:id>', views.item_detail),
-    path('create_order_details/', views.create_order_details, name='create_order_details'),
-    path('orders/', views.create_order, name='create_order'),
+    # path('create_order_details/', views.create_order_details, name='create_order_details'),
+    # path('orders/', views.create_order, name='create_order'),
+    path('orders/', OrderListCreateView.as_view(), name='order-list-create'),
+    path('items/', ItemListCreateView.as_view(), name='item-list-create'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
